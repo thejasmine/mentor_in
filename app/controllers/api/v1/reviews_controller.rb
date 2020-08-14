@@ -1,4 +1,5 @@
 class Api::V1::ReviewsController < ApplicationController
+skip_before_action :verify_authenticity_token
   def new
     @review = Review.new
     @appointment = Appointment.find(params[:appointment_id])
