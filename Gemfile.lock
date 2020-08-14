@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: f0a84aad8970d8d9f73dfd6e7ed68ccc84f4f9e6
+  branch: master
+  specs:
+    faker (2.13.0)
+      i18n (>= 1.6, < 2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -215,6 +223,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   devise
+  faker!
   jbuilder (~> 2.7)
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
