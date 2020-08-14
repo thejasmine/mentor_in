@@ -1,1 +1,6 @@
 <h2>Mentor.in</h2>
+<% if user_signed_in? %>
+  <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+<% else %>
+  <%= link_to "Login or Signup", new_user_session_path %>
+<% end %>
