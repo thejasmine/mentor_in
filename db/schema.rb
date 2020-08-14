@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_14_113953) do
+ActiveRecord::Schema.define(version: 2020_08_14_123506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(version: 2020_08_14_113953) do
     t.datetime "end_time"
     t.text "level"
     t.text "link"
-    t.text "event"
     t.integer "capacity"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -67,6 +66,8 @@ ActiveRecord::Schema.define(version: 2020_08_14_113953) do
     t.string "description"
     t.string "expertise"
     t.string "about_me"
+    t.string "authentication_token", limit: 30
+    t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
