@@ -18,12 +18,12 @@ class Api::V1::AppointmentsController < ApplicationController
   def create
     @appointment = Appointment.new(appointment_params)
     @event = Event.find(params[:event_id])
-    @user = current_user
-    @appointment.requester_id = @user.id
+    user = User.find(params[:user_id])
+    # @user = current_user
+    @appointment.requester_id = user
     @appointment.event_id = @event.id
     if @appointment.save
       render json: @appointments
-      redirect_to events_path
     else
       render :new
     end
@@ -33,12 +33,11 @@ class Api::V1::AppointmentsController < ApplicationController
     @appointment = Appointment.find(params[:id])
     @appointment.update(appointment_finished_params)
     render json: @appointments
-    redirect_to appointments_path
   end
 
   def destroy
     @appointment.destroy
-    redirect_to appointments_path
+    render json: @appointments
   end
 
   private
@@ -47,7 +46,7 @@ class Api::V1::AppointmentsController < ApplicationController
   end
 
   def appointment_params
-    params.require(:appointment).permit(:date)
+    params.require(:appointment).permit(:date, :user_id)
   end
 
   def appointment_finished_params
