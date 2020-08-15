@@ -15,7 +15,7 @@ skip_before_action :verify_authenticity_token
     @event = Event.new(event_params)
     # @event.user = current_user
     if @event.save
-      redirect_to @event, notice: 'Your event has been created'
+      redirect_to api_v1_events_path, notice: 'Your event has been created'
     else
       render :new
     end
