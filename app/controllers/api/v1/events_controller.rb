@@ -10,6 +10,17 @@ skip_before_action :verify_authenticity_token
     render json: @event, include: ['user','appointments']
   end
 
+
+  def create
+    @event = Event.new(event_params)
+    @event.user = current_user
+    if @event.save
+      redirect_to @event, notice: 'Your event has been created'
+    else
+      render :new
+    end
+  end
+
   def update
     @event = Event.find(params[:id])
     if @event.update(event_params)
