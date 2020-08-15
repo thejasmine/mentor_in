@@ -1,0 +1,22 @@
+version: '3'
+services:
+  db:
+    container_name: mentor.io-db
+    image: postgres:12.3
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: secret
+  web:
+    restart: always
+    container_name: mentor.io-api
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 8080 -b '0.0.0.0'"
+    volumes:
+      - .:/mentor.io
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+volumes:
+  pgdata:
