@@ -10,6 +10,7 @@ Rails.application.routes.draw do
         resources :reviews, only: [:new, :create]
       end
       resources :users, only: [:show]
+      get 'appointments/:user_id' => 'appointments#user_appointment'
     end
     end
   end
