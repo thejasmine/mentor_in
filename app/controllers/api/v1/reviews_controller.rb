@@ -11,7 +11,6 @@ skip_before_action :verify_authenticity_token
     @review.appointment_id = @appointment.id
     if @review.save
       render json: @review
-      redirect_to appointments_path
     else
       raise
       render :new
