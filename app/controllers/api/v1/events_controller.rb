@@ -12,7 +12,7 @@ skip_before_action :verify_authenticity_token
 
   def create
     @event = Event.new(event_params)
-    # @event.user = current_user
+    @event.user = current_user
     if @event.save
       render json: @event
     else
