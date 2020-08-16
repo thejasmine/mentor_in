@@ -1,19 +1,19 @@
 class Api::V1::AppointmentsController < ApplicationController
   before_action :find_appointment, only: [:update, :destroy]
   skip_before_action :verify_authenticity_token
-  # def index
+  def index
+    @user = current_user
+    @appointments = Appointment.where(requester_id: @user.id)
+    @owner_appointments = @user.appointments_as_owner
+    render json: @appointments, include: 'reviews'
+  end
+
+  # def user_appointment
   #   user = User.find(params[:user_id])
   #   @appointments = Appointment.where(requester_id: user)
   #   @owner_appointments = user.appointments_as_owner
   #   render json: @appointments, include: 'reviews'
   # end
-
-  def user_appointment
-    user = User.find(params[:user_id])
-    @appointments = Appointment.where(requester_id: user)
-    @owner_appointments = user.appointments_as_owner
-    render json: @appointments, include: 'reviews'
-  end
 
   def create
     @appointment = Appointment.new(appointment_params)
