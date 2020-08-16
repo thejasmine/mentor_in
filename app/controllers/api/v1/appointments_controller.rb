@@ -19,7 +19,9 @@ class Api::V1::AppointmentsController < ApplicationController
     @event = Event.find(params[:event_id])
     # user = User.find(params[:user_id])
     # @user = current_user
+
     # @appointment.requester_id = user
+
     @appointment.event_id = @event.id
     if @appointment.save
       render json: @appointment
