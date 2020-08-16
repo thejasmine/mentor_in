@@ -23,7 +23,7 @@ class Api::V1::AppointmentsController < ApplicationController
     @appointment.requester_id = current_user
     @appointment.event_id = @event.id
     if @appointment.save
-      render json: @appointments
+      render json: @appointment
     else
       render :new
     end
